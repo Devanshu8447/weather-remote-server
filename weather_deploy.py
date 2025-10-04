@@ -1,4 +1,3 @@
-# weather_deploy.py
 from typing import Any
 import httpx
 from mcp.server.fastmcp import FastMCP
@@ -13,7 +12,7 @@ USER_AGENT = "weather-app/1.0"
 
 async def make_nws_request(url: str) -> dict[str, Any] | None:
     """Make a request to the NWS API with proper error handling."""
-    headers = {"User-Agent": USER-AGENT, "Accept": "application/geo+json"}
+    headers = {"User-Agent": USER_AGENT, "Accept": "application/geo+json"}
     async with httpx.AsyncClient() as client:
         try:
             response = await client.get(url, headers=headers, timeout=30.0)
@@ -48,7 +47,7 @@ async def get_alerts(state: str) -> str:
     if not data["features"]:
         return "No active alerts for this state."
     alerts = [format_alert(feature) for feature in data["features"]]
-        return "\n---\n".join(alerts)
+    return "\n---\n".join(alerts)
 
 
 @mcp.tool()
@@ -77,5 +76,3 @@ Forecast: {period['detailedForecast']}
 """
         forecasts.append(forecast)
     return "\n---\n".join(forecasts)
-
-# NO __main__ BLOCK HERE
